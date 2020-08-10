@@ -43,48 +43,51 @@ Output : 2
 Explanation
 Platform #1 can accommodate train 1.
 Platform #2 can accommodate train 2.
+Note that the departure of train 1 is same as arrival of train 2, i.e. 6, and thus we need a separate platform to accommodate train 2.
 
-Solution : 
+Solution :
+
+import java.util.*; 
 
 class Railway { 
 	
 	public static void main(String[] args)
 	{   
 		
-		int p = 1, res = 1, i = 1, j = 0;
+		int min_platform = 1, i = 1, j = 0;
 		Scanner sc = new Scanner(System.in);
 		int N = sc.nextInt(), d;
 		
-		
-		int arr[] = new int[N]; 
-		int dep[] = new int[N];
+		int arr[] = new int[N]; //arrival time array
+		int dep[] = new int[N]; // stoppage time array
 		for(int k =0; k < N; k++)
 		{
-			arr[k] = sc.nextInt();
-			d = sc.nextInt();
-			dep[k] = arr[k] + d;
+			arr[k] = sc.nextInt(); // arrival time 
+			d = sc.nextInt(); // stoppage time
+			dep[k] = arr[k] + d; // departure time = arrival time + stoppage time
 		}
+		// Sort the arrays
 		Arrays.sort(arr); 
 		Arrays.sort(dep);  
 		
 		while (i < N && j < N) 
 		{ 
-
+			System.out.println(i);
+            //increment the count of platforms  when train t2 arrives before/on the 
+			// departure time of the train t1 
 			if (arr[i] <= dep[j]) { 
-				p++; 
+				min_platform++; 
 				i++; 
 			} 
-
+			//else decrement the count of the platforms
 			else if (arr[i] > dep[j]) { 
-				p--; 
+				min_platform--; 
 				j++; 
 			} 
-
-			if (p > res) 
-			{	res = p; }
 			
 		}
-		System.out.println(res);
+		System.out.println(min_platform);
 	}
 }
-Note that the departure of train 1 is same as arrival of train 2, i.e. 6, and thus we need a separate platform to accommodate train 2.
+
+
