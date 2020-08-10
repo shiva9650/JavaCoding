@@ -1,6 +1,7 @@
 Problem Description : Given an array of integers A, and an integer K find number of happy elements.
 
-Element X is happy if there exists at least 1 element whose difference is less than K i.e. an element X is happy, if there is another element in the range [X-K, X+K] other than X itself.
+Element X is happy if there exists at least 1 element whose difference is less than K i.e. an element X is happy, 
+if there is another element in the range [X-K, X+K] other than X itself.
 
 Constraints : 1 <= N <= 10^5
 0 <= K <= 10^5
@@ -19,17 +20,19 @@ import java.util.Scanner;
 
 public class CountPair {
 	
-	public static void main(String args[])
-	{
+   public static void main(String args[])
+     {
 	int N,K,count = 0,add,sub;
 	Scanner sc = new Scanner(System.in);
 	N = sc.nextInt();
 	K = sc.nextInt();
-    int arr[] = new int[N];
+        int arr[] = new int[N];
+	
 	for(int i=0;i<N;i++)
-	{
+	  {
 		arr[i] = sc.nextInt();
-	}
+	  }
+	  // sort the array
 	Arrays.sort(arr);
 	
 	for(int i=0;i<N;i++)
@@ -38,11 +41,12 @@ public class CountPair {
 		sub = arr[i] - K;
 		int flag = 0;
 
-			for(int j = 0;j<N;j++)
+			for(int j = 0; j<N; j++)
 			{
+			        // Exclude element X
 				if(i != j)
 				{
-					
+					// check if atlest one element from an array is in the range [X-K,X+K]
 					if(arr[j] >= sub && arr[j] <= add)
 					{
 						flag = 1;
@@ -51,7 +55,7 @@ public class CountPair {
 			}
 			if(flag == 1)
 			{
-				count++;
+				count++; //count of happy elements
 			}
 		}
 	System.out.println(count);
