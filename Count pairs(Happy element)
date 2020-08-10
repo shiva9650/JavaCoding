@@ -1,0 +1,59 @@
+Problem Description : Given an array of integers A, and an integer K find number of happy elements.
+
+Element X is happy if there exists at least 1 element whose difference is less than K i.e. an element X is happy, if there is another element in the range [X-K, X+K] other than X itself.
+
+Constraints : 1 <= N <= 10^5
+0 <= K <= 10^5
+0 <= A[i] <= 10^9
+
+Input : First line contains two integers N and K where N is size of the array and K is a number as described above.
+Second line contains n integers separated by space.
+
+Output : Print a single integer denoting the total no of happy elements.
+
+Solution : Java
+
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class CountPair {
+	
+	public static void main(String args[])
+	{
+	int N,K,count = 0,add,sub;
+	Scanner sc = new Scanner(System.in);
+	N = sc.nextInt();
+	K = sc.nextInt();
+    int arr[] = new int[N];
+	for(int i=0;i<N;i++)
+	{
+		arr[i] = sc.nextInt();
+	}
+	Arrays.sort(arr);
+	
+	for(int i=0;i<N;i++)
+	{
+		add = arr[i] + K;
+		sub = arr[i] - K;
+		int flag = 0;
+
+			for(int j = 0;j<N;j++)
+			{
+				if(i != j)
+				{
+					
+					if(arr[j] >= sub && arr[j] <= add)
+					{
+						flag = 1;
+					}
+				}
+			}
+			if(flag == 1)
+			{
+				count++;
+			}
+		}
+	System.out.println(count);
+	}
+}
